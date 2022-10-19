@@ -70,6 +70,32 @@ export default function PerentronApp() {
         // setGroupInfo([...groupInfo, { id: uuidv4(), nombre: empleado, turnoProgramado: turnoProgramado, turnoRealizado: turnoRealizado }])
     }
 
+    // const addTurnoProgramadoIni = (id, turnoProgramadoIni) => {
+    //     const updatedGroupInfo = groupInfo.map(group =>
+    //         group.id === id ? { ...group, turnoProgramadoIni: turnoProgramadoIni } : group)
+    //     setGroupInfo(updatedGroupInfo)
+    // }
+    // const addTurnoProgramadoFin = (id, turnoProgramadoFin) => {
+    //     const updatedGroupInfo = groupInfo.map(group =>
+    //         group.id === id ? { ...group, turnoProgramadoFin: turnoProgramadoFin } : group)
+    //     setGroupInfo(updatedGroupInfo)
+    // }
+    // const addTurnoSalida = (id, turnoSalida) => {
+    //     const updatedGroupInfo = groupInfo.map(group =>
+    //         group.id === id ? { ...group, turnoSalida: turnoSalida } : group)
+    //     setGroupInfo(updatedGroupInfo)
+    // }
+
+    const addTurno = (id, turnoProgramadoIni, turnoProgramadoFin, turnoSalida) => {
+        const updatedGroupInfo = groupInfo.map(group =>
+            group.id === id ? {
+                ...group,
+                turnoProgramadoIni: turnoProgramadoIni,
+                turnoProgramadoFin: turnoProgramadoFin,
+                turnoSalida: turnoSalida
+            } : group)
+        setGroupInfo(updatedGroupInfo)
+    }
 
     return (
         <React.Fragment>
@@ -79,7 +105,8 @@ export default function PerentronApp() {
 
             <GroupGenerator addEmpleado={addEmpleado} />
 
-            <GroupList groupInfo={groupInfo} />
+            <GroupList groupInfo={groupInfo}
+                addTurno={addTurno} />
 
 
         </React.Fragment>

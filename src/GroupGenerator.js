@@ -9,18 +9,6 @@ import { TextField, Autocomplete } from '@mui/material'
 const optionsForAutocomplete = ["Nombre", "Carlos Cue", "Ruben Galvez", "David Boo", "Pablo Mendez"]
 
 export default function GroupGenerator(props) {
-    // const debounce = (protectedFunction, delay = 1000) => {
-    //     let timeoutId;
-    //     return (args) => {
-    //         if (timeoutId) {
-    //             clearTimeout(timeoutId);
-    //         };
-    //         timeoutId = setTimeout(() => {
-    //             protectedFunction.apply(null, args)
-    //         }, delay);
-    //     }
-    // }
-
     // const defaultGroupInfo = [
     //     {
     //         id: "uuidv4()",
@@ -69,7 +57,7 @@ export default function GroupGenerator(props) {
                 onInputChange={(event, newInputValue) => {
                     setInputValue(newInputValue);
                 }}
-                id="controllable-states-demo"
+                id="empleado-autocomplete"
                 options={optionsForAutocomplete}
                 sx={{ width: 300 }}
                 renderInput={(params) => <TextField {...params} label="Nombre Empleado" />}
