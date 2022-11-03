@@ -1,18 +1,38 @@
+// react related
 import React, { useState } from 'react'
 // import useInputSelect from "./hooks/useInputState"
 
-import { v4 as uuidv4 } from 'uuid';
+// componentes de material ui
+import PrintIcon from '@mui/icons-material/Print';
+import { Button } from '@mui/material';
 
+// librerias
+import { v4 as uuidv4 } from 'uuid';
+import Docxtemplater from 'docxtemplater';
+import PizZip from 'pizzip';
+import PizZipUtils from 'pizzip/utils/index.js';
+import { saveAs } from "file-saver"
+
+// componentes propios
 import DutySelect from './DutySelect'
 import EmpresaSelect from './EmpresaSelect'
 import GroupGenerator from './GroupGenerator'
 import MotivoInput from './MotivoInput'
 import GroupList from './GroupList';
 
+const documento = require("./AH-HR-R07-REGISTRO-HORAS-PERENTORIAS.docx")
+
+// 
+
+// perentron-proyect\src\AH-HR-R07 REGISTRO HORAS PERENTORIAS.docx
+
+// funcion para cargar el documento
+function loadFile(url, callback) {
+    PizZipUtils.getBinaryContent(url, callback)
+}
 
 
 export default function PerentronApp() {
-
     // const defaultPerentoriaInfo = {
 
     //     compañia: "",
@@ -70,6 +90,8 @@ export default function PerentronApp() {
         // setGroupInfo([...groupInfo, { id: uuidv4(), nombre: empleado, turnoProgramado: turnoProgramado, turnoRealizado: turnoRealizado }])
     }
 
+
+
     // const addTurnoProgramadoIni = (id, turnoProgramadoIni) => {
     //     const updatedGroupInfo = groupInfo.map(group =>
     //         group.id === id ? { ...group, turnoProgramadoIni: turnoProgramadoIni } : group)
@@ -96,7 +118,78 @@ export default function PerentronApp() {
             } : group)
         setGroupInfo(updatedGroupInfo)
     }
+    const saveOnWord = () => {
+        // "perentron-proyect/src/AH-HR-R07-REGISTRO-HORAS-PERENTORIAS.docx"
+        // https://docxtemplater.com/tag-example.docx
+        loadFile(documento,
+            function (error, content) {
+                if (error) {
+                    throw error;
+                }
+                let zip = new PizZip(content);
+                // let zip = new PizZip();
+                // zip.file("AH-HR-R07-REGISTRO-HORAS-PERENTORIAS.docx", content, { binary: true })
+                let doc = new Docxtemplater(zip, {
+                    paragraphLoop: true,
+                    linebreaks: true,
+                });
+                doc.setData({
+                    // first_name: 'John',
+                    // last_name: 'Doe',
+                    // phone: '0652455478',
+                    // description: 'New Website',
+                    supervisor: comonGroupInfo.supervisor,
+                    motivo: comonGroupInfo.motivo,
+                    nombre: groupInfo[0].nombre,
+                    inicio: groupInfo[0].turnoProgramadoIni,
+                    fin: groupInfo[0].turnoProgramadoFin,
+                    salida: groupInfo[0].turnoSalida,
 
+
+                });
+                try {
+                    doc.render();
+                } catch (error) {
+                    // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+                    function replaceErrors(key, value) {
+                        if (value instanceof Error) {
+                            return Object.getOwnPropertyNames(value).reduce(function (
+                                error,
+                                key
+                            ) {
+                                error[key] = value[key];
+                                return error;
+                            },
+                                {});
+                        }
+                        return value;
+                    }
+                    console.log(JSON.stringify({ error: error }, replaceErrors));
+
+                    if (error.properties && error.properties.errors instanceof Array) {
+                        const errorMessages = error.properties.errors
+                            .map(function (error) {
+                                return error.properties.explanation;
+                            })
+                            .join('\n');
+                        console.log('errorMessages', errorMessages);
+                        // errorMessages is a humanly readable message looking like this :
+                        // 'The tag beginning with "foobar" is unopened'
+                    }
+                    throw error;
+                }
+
+                let out = doc.getZip().generate({
+                    type: "blob",
+                    mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                });
+                saveAs(out, `AH-HR-R07-REGISTRO-HORAS-PERENTORIAS${groupInfo[0].nombre}.docx`)
+            })
+
+        alert("correr codigo de docxtemplater pizzip")
+        console.log(comonGroupInfo)
+        console.log(groupInfo)
+    }
     return (
         <React.Fragment>
             <EmpresaSelect addCompany={addCompany} />
@@ -108,6 +201,9 @@ export default function PerentronApp() {
             <GroupList groupInfo={groupInfo}
                 addTurno={addTurno} />
 
+            <Button variant="contained" onClick={saveOnWord} endIcon={<PrintIcon />}>
+                Guardar para imprimir
+            </Button>
 
         </React.Fragment>
 

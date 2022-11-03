@@ -22,7 +22,7 @@ export default function GroupList(props) {
                 )
                 )}
 
-                <ListItem sx={{ margin: "1rem", padding: "1rem" }} alignItems='flex-start'>
+                {/* <ListItem sx={{ margin: "1rem", padding: "1rem" }} alignItems='flex-start'>
                     <ListItemText primary={"Guardar Grupo"} />
 
                     <ListItemSecondaryAction sx={{ padding: 5 }} >
@@ -34,7 +34,7 @@ export default function GroupList(props) {
                     </ListItemSecondaryAction>
 
 
-                </ListItem>
+                </ListItem> */}
 
             </List>
         )
