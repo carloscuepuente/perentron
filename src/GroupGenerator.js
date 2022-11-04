@@ -3,10 +3,12 @@ import React, { useState } from 'react'
 
 // import debounce from './utils'
 
+import optionsForAutocomplete from './optionsForAutocomplete';
+
 import { TextField, Autocomplete } from '@mui/material'
 
 
-const optionsForAutocomplete = ["Nombre", "Carlos Cue", "Ruben Galvez", "David Boo", "Pablo Mendez"]
+// const optionsForAutocomplete = ["Nombre", "Carlos Cue", "Ruben Galvez", "David Boo", "Pablo Mendez"]
 
 export default function GroupGenerator(props) {
     // const defaultGroupInfo = [

@@ -38,12 +38,20 @@ export default function DutySelect(props) {
                     onChange={setSupervisor}
                 >
 
-                    <MenuItem value={"Ramco1"}>Ramco1</MenuItem>
-                    <MenuItem value={"Ramco2"}>Ramco2</MenuItem>
-                    <MenuItem value={"Ramco3"}>Ramco3</MenuItem>
-                    <MenuItem value={"Duty1"}>Duty1</MenuItem>
-                    <MenuItem value={"Duty2"}>Duty2</MenuItem>
-                    <MenuItem value={"Duty3"}>Duty3</MenuItem>
+                    <MenuItem value={"Alverto Couceiro"}>Alverto Couceiro</MenuItem>
+                    <MenuItem value={"Pablo Mendez"}>Pablo Mendez</MenuItem>
+                    <MenuItem value={"Alberto Pereiro"}>Alberto Pereiro</MenuItem>
+                    <MenuItem value={"Sergio Paderne"}>Sergio Paderne</MenuItem>
+                    <MenuItem value={"Manuel Rilo"}>Manuel Rilo</MenuItem>
+                    <MenuItem value={"Andres Rico"}>Andres Rico</MenuItem>
+                    <MenuItem value={"Iñaqui Crespo"}>Iñaqui Crespo</MenuItem>
+                    <MenuItem value={"Elena Camaño"}>Elena Camaño</MenuItem>
+                    <MenuItem value={"Paloma Quevedo"}>Paloma Quevedo</MenuItem>
+                    <MenuItem value={"Beatriz Rivas"}>Beatriz Rivas</MenuItem>
+                    <MenuItem value={"Olaya Barral"}>Olaya Barral</MenuItem>
+                    <MenuItem value={"Raquel Fernandez"}>Raquel Fernandez</MenuItem>
+                    <MenuItem value={"Clara Alvarez"}>Clara Alvarez</MenuItem>
+                    <MenuItem value={"Alba Fernandez"}>Alba Fernandez</MenuItem>
                 </Select>
             </FormControl>
         </Box>
