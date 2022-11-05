@@ -49,8 +49,10 @@ export default function GroupGenerator(props) {
                 multiple={false}
                 value={empleado}
                 onChange={(event, newValue) => {
-                    empleadoChange(newValue);
-                    addEmpleado(newValue)
+                    if (newValue !== null) {
+                        empleadoChange(newValue);
+                        addEmpleado(newValue)
+                    }
                 }}
                 onClose={(event) => {
                     // alert("sasd")
