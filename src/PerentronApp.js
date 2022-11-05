@@ -4,7 +4,8 @@ import React, { useState } from 'react'
 
 // componentes de material ui
 import PrintIcon from '@mui/icons-material/Print';
-import { Button } from '@mui/material';
+import { Button, Grid } from '@mui/material';
+import Paper from '@mui/material/Paper';
 
 // librerias
 import { v4 as uuidv4 } from 'uuid';
@@ -22,9 +23,6 @@ import GroupList from './GroupList';
 
 const documento = require("./AH-HR-R07-REGISTRO-HORAS-PERENTORIAS.docx")
 
-// 
-
-// perentron-proyect\src\AH-HR-R07 REGISTRO HORAS PERENTORIAS.docx
 
 // funcion para cargar el documento
 function loadFile(url, callback) {
@@ -278,24 +276,43 @@ export default function PerentronApp() {
         //     })
 
         // alert("correr codigo de docxtemplater pizzip")
-        console.log(comonGroupInfo)
-        console.log(groupInfo)
+        // console.log(comonGroupInfo)
+        // console.log(groupInfo)
     }
     return (
         <React.Fragment>
-            <EmpresaSelect addCompany={addCompany} />
-            <DutySelect addSupervisor={addSupervisor} />
-            <MotivoInput addMotivo={addMotivo} />
+            <Paper
+                style={{
+                    padding: 0,
+                    margin: 0,
+                    height: "100vh",
+                    width: "100vw",
+                    backgroundColor: "#fafafa"
+                }}>
 
-            <GroupGenerator addEmpleado={addEmpleado} />
+                <Grid container justifyContent={"space-evenly"} spacing={4} style={{ marginTop: "1.5rem" }} >
 
-            <GroupList groupInfo={groupInfo}
-                addTurno={addTurno} />
+                    <Grid item lg={4} style={{ paddingLeft: "4rem" }}>
+                        <EmpresaSelect addCompany={addCompany} />
+                        <DutySelect addSupervisor={addSupervisor} />
+                        <MotivoInput addMotivo={addMotivo} />
+                    </Grid>
 
-            <Button variant="contained" onClick={saveOnWord} endIcon={<PrintIcon />}>
-                Guardar para imprimir
-            </Button>
 
+                    <Grid item lg={8}>
+                        <GroupGenerator addEmpleado={addEmpleado} />
+                        <GroupList groupInfo={groupInfo}
+                            addTurno={addTurno} />
+
+                        <Button variant="contained" onClick={saveOnWord} endIcon={<PrintIcon />}>
+                            Descargar Word
+                        </Button>
+
+                    </Grid>
+
+
+                </Grid>
+            </Paper>
         </React.Fragment>
 
 

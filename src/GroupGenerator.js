@@ -49,6 +49,7 @@ export default function GroupGenerator(props) {
                 multiple={false}
                 value={empleado}
                 onChange={(event, newValue) => {
+                    // agregada la condicional para prevenir la generacion de item list con valor null
                     if (newValue !== null) {
                         empleadoChange(newValue);
                         addEmpleado(newValue)
