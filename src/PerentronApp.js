@@ -211,7 +211,7 @@ export default function PerentronApp() {
                         type: "blob",
                         mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                     });
-                    saveAs(out, `AH-HR-R07-REGISTRO-HORAS-PERENTORIAS${groupInfo[0].nombre}.docx`)
+                    saveAs(out, `AH-HR-R07-REGISTRO-HORAS-PERENTORIAS${groupInfo[i].nombre}.docx`)
                 })
         }
         // loadFile(documento,
