@@ -28,7 +28,7 @@ export default function DutySelect(props) {
 
     return (
         <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
+            <FormControl fullWidth sx={{ marginTop: "1.5rem" }}>
                 <InputLabel id="supervisor-select-label">Ramco/Duty</InputLabel>
                 <Select
                     labelId="supervisor-select-label"
@@ -38,7 +38,7 @@ export default function DutySelect(props) {
                     onChange={setSupervisor}
                 >
 
-                    <MenuItem value={"Alverto Couceiro"}>Alverto Couceiro</MenuItem>
+                    <MenuItem value={"Alberto Couceiro"}>Alberto Couceiro</MenuItem>
                     <MenuItem value={"Pablo Mendez"}>Pablo Mendez</MenuItem>
                     <MenuItem value={"Alberto Pereiro"}>Alberto Pereiro</MenuItem>
                     <MenuItem value={"Sergio Paderne"}>Sergio Paderne</MenuItem>

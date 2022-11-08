@@ -15,6 +15,7 @@ import PizZipUtils from 'pizzip/utils/index.js';
 import { saveAs } from "file-saver"
 
 // componentes propios
+import FechaSelect from './FechaSelect';
 import DutySelect from './DutySelect'
 import EmpresaSelect from './EmpresaSelect'
 import GroupGenerator from './GroupGenerator'
@@ -22,7 +23,8 @@ import MotivoInput from './MotivoInput'
 import GroupList from './GroupList';
 
 const documento = require("./AH-HR-R07-REGISTRO-HORAS-PERENTORIAS.docx")
-
+// TODO simbolitos de cuadrados ☐  ☒
+// {^isIhandling }☐{/ isIhandling}
 
 // funcion para cargar el documento
 function loadFile(url, callback) {
@@ -88,14 +90,26 @@ export default function PerentronApp() {
     // console.log(groupInfo)
 
     const addCompany = (compañia) => {
-        // console.log("corri")
         // console.log(compañia)
         setComonGroupInfo({ ...comonGroupInfo, compañia: compañia })
     };
 
+    const addCompanyBoolean = (isRyanair, isIhandling) => {
+        // console.log(isRyanair, isIhandling)
+        setComonGroupInfo({ ...comonGroupInfo, isRyanair, isIhandling })
+    }
+
+    const addDate = (date) => {
+        setComonGroupInfo({ ...comonGroupInfo, fecha: date })
+    }
+
     const addSupervisor = (supervisor) => {
         setComonGroupInfo({ ...comonGroupInfo, supervisor: supervisor })
     };
+
+    const addChekedMotivo = (...checkedMotivo) => {
+        setComonGroupInfo({ ...comonGroupInfo, checkedMotivo })
+    }
 
     const addMotivo = (motivo) => {
         setComonGroupInfo({ ...comonGroupInfo, motivo: motivo })
@@ -131,7 +145,7 @@ export default function PerentronApp() {
                 turnoSalida: turnoSalida
             } : group)
         setGroupInfo(updatedGroupInfo)
-    }
+    };
 
     // [
     //     {
@@ -168,11 +182,17 @@ export default function PerentronApp() {
                     doc.setData({
                         supervisor: comonGroupInfo.supervisor,
                         motivo: comonGroupInfo.motivo,
+                        isRyanair: comonGroupInfo.isRyanair,
+                        isIhandling: comonGroupInfo.isIhandling,
+                        fecha: comonGroupInfo.fecha,
+                        impuntualidad: comonGroupInfo.checkedMotivo[0].impuntualAC ? "☒" : "☐",
+                        retraso: comonGroupInfo.checkedMotivo[0].retrasoRel ? "☒" : "☐",
+                        ausencia: comonGroupInfo.checkedMotivo[0].ausencia ? "☒" : "☐",
+                        otra: comonGroupInfo.checkedMotivo[0].otraCircus ? "☒" : "☐",
                         nombre: groupInfo[i].nombre,
                         inicio: groupInfo[i].turnoProgramadoIni,
                         fin: groupInfo[i].turnoProgramadoFin,
                         salida: groupInfo[i].turnoSalida,
-
 
                     });
                     try {
@@ -293,9 +313,14 @@ export default function PerentronApp() {
                 <Grid container justifyContent={"space-evenly"} spacing={4} style={{ marginTop: "1.5rem" }} >
 
                     <Grid item lg={4} style={{ paddingLeft: "4rem" }}>
-                        <EmpresaSelect addCompany={addCompany} />
+                        <FechaSelect addDate={addDate} />
+                        <EmpresaSelect addCompany={addCompany} addCompanyBoolean={addCompanyBoolean} />
                         <DutySelect addSupervisor={addSupervisor} />
-                        <MotivoInput addMotivo={addMotivo} />
+                        <MotivoInput addMotivo={addMotivo} addChekedMotivo={addChekedMotivo} />
+
+                        <Button sx={{ marginTop: "1.5rem" }} variant="contained" onClick={saveOnWord} endIcon={<PrintIcon />}>
+                            Descargar Word
+                        </Button>
                     </Grid>
 
 
@@ -304,9 +329,7 @@ export default function PerentronApp() {
                         <GroupList groupInfo={groupInfo}
                             addTurno={addTurno} />
 
-                        <Button variant="contained" onClick={saveOnWord} endIcon={<PrintIcon />}>
-                            Descargar Word
-                        </Button>
+
 
                     </Grid>
 

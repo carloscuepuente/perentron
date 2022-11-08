@@ -39,7 +39,8 @@ export default function EmpleadoItem(props) {
     let renderThis = <React.Fragment>
 
         <TextField
-            value={turnoProgramadoIni}
+            // value={turnoProgramadoIni}
+            defaultValue={turnoProgramadoIni}
             onChange={handleIniChange}
             id="turnoProgramadoIni"
             label="Inicio Programado"
@@ -50,7 +51,8 @@ export default function EmpleadoItem(props) {
             sx={{ width: 150 }}
         />
         <TextField
-            value={turnoProgramadoFin}
+            // value={turnoProgramadoFin}
+            defaultValue={turnoProgramadoFin}
             onChange={handleFinChange}
             id="turnoProgramadoFin"
             label="Fin Programado"
@@ -61,7 +63,8 @@ export default function EmpleadoItem(props) {
             sx={{ width: 150 }}
         />
         <TextField
-            value={turnoRealizadoFin}
+            // value={turnoRealizadoFin}
+            defaultValue={turnoRealizadoFin}
             // onBlur={handleRealizadoChange}
             onChange={handleRealizadoChange}
             id="turnoRealizadoFin"
