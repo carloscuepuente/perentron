@@ -192,7 +192,7 @@ export default function PerentronApp() {
                         nombre: groupInfo[i].nombre,
                         inicio: groupInfo[i].turnoProgramadoIni,
                         fin: groupInfo[i].turnoProgramadoFin,
-                        salida: groupInfo[i].turnoSalida,
+                        salida: groupInfo[i].turnoSalida ? groupInfo[i].turnoSalida : "",
 
                     });
                     try {

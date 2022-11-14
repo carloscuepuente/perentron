@@ -84,7 +84,8 @@ const optionsForAutocomplete = [
     "Miriam Castro",
     "Lucia Vazquez",
     "Sofia Miranda",
-    "Daniel Gil"
+    "Daniel Gil",
+    "Carmen Botana"
 ]
 
 export default optionsForAutocomplete;
