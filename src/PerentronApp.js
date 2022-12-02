@@ -12,7 +12,8 @@ import { v4 as uuidv4 } from 'uuid';
 import Docxtemplater from 'docxtemplater';
 import PizZip from 'pizzip';
 import PizZipUtils from 'pizzip/utils/index.js';
-import { saveAs } from "file-saver"
+import { saveAs } from "file-saver";
+import moment from 'moment';
 
 // componentes propios
 import FechaSelect from './FechaSelect';
@@ -30,7 +31,62 @@ const documento = require("./AH-HR-R07-REGISTRO-HORAS-PERENTORIAS.docx")
 function loadFile(url, callback) {
     PizZipUtils.getBinaryContent(url, callback)
 }
+const parseTime = function (timeToParse) {
+    //parse a string into a date format using moments
+    const parsedTime = moment(`1989-08-23 ${timeToParse}`, `YYYY-MM-DD HH:mm`)
+    return parsedTime
+};
 
+const getDuration = function (time1, time2) {
+    // para usar hay que pasarle primero el tiempo mas que ocurra primero y luego el de despues
+    let x = parseTime(time1);
+    let y = parseTime(time2);
+    let diference = x.diff(y) //diference es una diferencia en milisegundos
+    // si el momento 1 es antes que el momento 2 la diferencia es negativa
+    if (diference < 0) {
+        let result = moment.duration(diference)
+        let entero = Math.floor(-parseFloat(result.as("hours")));
+        let decimal = (-parseFloat(result.as("hours")) % 1).toFixed(2).substring(2)
+
+
+        if (parseInt(decimal) < 25) {
+            return `${entero},00`
+        }
+        if (parseInt(decimal) >= 25 && parseInt(decimal) < 50) {
+            return `${entero},25`
+        }
+        if (parseInt(decimal) >= 50 && parseInt(decimal) < 75) {
+            return `${entero},50`
+        }
+        if (parseInt(decimal) >= 75 && parseInt(decimal) < 100) {
+            return `${entero},75`
+        }
+    };
+    if (diference > 0) {
+        x = moment(`1989-08-23 ${time1}`, `YYYY-MM-DD HH:mm`);
+        y = moment(`1989-08-24 ${time2}`, `YYYY-MM-DD HH:mm`);
+
+        let newdiff = x.diff(y);
+        let result = moment.duration(newdiff);
+        console.log(result)
+        let entero = Math.floor(-parseFloat(result.as("hours")));
+        let decimal = (-parseFloat(result.as("hours")) % 1).toFixed(2).substring(2)
+        console.log(entero)
+        if (parseInt(decimal) < 25) {
+            return `${entero},00`
+        }
+        if (parseInt(decimal) >= 25 && parseInt(decimal) < 50) {
+            return `${entero},25`
+        }
+        if (parseInt(decimal) >= 50 && parseInt(decimal) < 75) {
+            return `${entero},50`
+        }
+        if (parseInt(decimal) >= 75 && parseInt(decimal) < 100) {
+            return `${entero},75`
+        }
+    };
+
+};
 
 export default function PerentronApp() {
     // const defaultPerentoriaInfo = {
@@ -142,10 +198,13 @@ export default function PerentronApp() {
                 ...group,
                 turnoProgramadoIni: turnoProgramadoIni,
                 turnoProgramadoFin: turnoProgramadoFin,
-                turnoSalida: turnoSalida
+                turnoSalida: turnoSalida,
+                peren: getDuration(turnoProgramadoFin, turnoSalida)
             } : group)
         setGroupInfo(updatedGroupInfo)
     };
+
+
 
     // [
     //     {
@@ -193,6 +252,7 @@ export default function PerentronApp() {
                         inicio: groupInfo[i].turnoProgramadoIni,
                         fin: groupInfo[i].turnoProgramadoFin,
                         salida: groupInfo[i].turnoSalida ? groupInfo[i].turnoSalida : "",
+                        peren: groupInfo[i].turnoSalida ? groupInfo[i].peren : ""
 
                     });
                     try {
