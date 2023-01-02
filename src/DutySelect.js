@@ -52,7 +52,7 @@ export default function DutySelect(props) {
                     <MenuItem value={"Raquel Fernandez"}>Raquel Fernandez</MenuItem>
                     <MenuItem value={"Clara Alvarez"}>Clara Alvarez</MenuItem>
                     <MenuItem value={"Alba Fernandez"}>Alba Fernandez</MenuItem>
-                    <MenuItem value={"Noelia Álvarez"}>Alba Fernandez</MenuItem>
+                    <MenuItem value={"Noelia Álvarez"}>Noelia Álvarez</MenuItem>
                 </Select>
             </FormControl>
         </Box>
