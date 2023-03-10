@@ -54,6 +54,19 @@ const optionsForAutocomplete = [
     "Isaac Figueira",
     "Victor Cebey",
     "Carlos Alzate",
+    "Diego Mallo",
+    "Francisco Mayo",
+    "Aitor Rubio",
+    "Gonzalo García",
+    "Christian Pena",
+    "Daniel Oro",
+    "Maria Rico",
+    "Giulia Gallina",
+    "Charlotte Conway",
+    "Uxia Gairi",
+    "Alejandro Castiñeiras",
+    "Diego Alonso",
+    // empieza pasaje
     "Elena Camaño",
     "Clara Alvarez",
     "Leydy Castro",
@@ -85,7 +98,10 @@ const optionsForAutocomplete = [
     "Lucia Vazquez",
     "Sofia Miranda",
     "Daniel Gil",
-    "Carmen Botana"
+    "Carmen Botana",
+    "Sara Alvarez",
+    "Judith Cobos",
+    "Jasone Altadill"
 ]
 
 export default optionsForAutocomplete;
