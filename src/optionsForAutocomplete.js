@@ -101,7 +101,8 @@ const optionsForAutocomplete = [
     "Carmen Botana",
     "Sara Alvarez",
     "Judith Cobos",
-    "Jasone Altadill"
+    "Jasone Altadill",
+    "Natalia Carballido"
 ]
 
 export default optionsForAutocomplete;
