@@ -61,7 +61,6 @@ const optionsForAutocomplete = [
     "Christian Pena",
     "Daniel Oro",
     "Maria Rico",
-    "Giulia Gallina",
     "Charlotte Conway",
     "Uxia Gairi",
     "Alejandro Castiñeiras",
@@ -77,6 +76,9 @@ const optionsForAutocomplete = [
     "Ariz Rodriguez",
     "Lauryn Garcia",
     "Pedro Goldar",
+    "Jose Iglesias",
+    "Javier Castiñeiras",
+
     // empieza pasaje
     "Elena Camaño",
     "Clara Alvarez",
