@@ -28,7 +28,7 @@ const optionsForAutocomplete = [
     "Lorenzo Veiga",
     "Iñaqui Crespo",
     "Francisco Lopez",
-    "Braian Sanchez",
+    "Brian Sanchez",
     "Xabier Boado",
     "Ricardo Lazara",
     "Brais Garcia",
