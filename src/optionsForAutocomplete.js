@@ -115,7 +115,20 @@ const optionsForAutocomplete = [
     "Sara Alvarez",
     "Judith Cobos",
     "Jasone Altadill",
-    "Natalia Carballido"
+    "Natalia Carballido",
+    "Jasone Altadill",
+    "Marina Alvarez",
+    "Daniel Ayala",
+    "Maria Cabanas",
+    "Isabel Costa",
+    "Maria Figueiras",
+    "Arturo Fraga",
+    "Celia Gomez",
+    "Guillermo Gonzalez",
+    "Mirian Martinez",
+
+
+
 ]
 
 export default optionsForAutocomplete;
