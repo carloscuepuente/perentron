@@ -116,7 +116,6 @@ const optionsForAutocomplete = [
     "Judith Cobos",
     "Jasone Altadill",
     "Natalia Carballido",
-    "Jasone Altadill",
     "Marina Alvarez",
     "Daniel Ayala",
     "Maria Cabanas",

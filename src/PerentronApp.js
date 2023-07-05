@@ -18,10 +18,11 @@ import moment from 'moment';
 // componentes propios
 import FechaSelect from './FechaSelect';
 import DutySelect from './DutySelect'
-import EmpresaSelect from './EmpresaSelect'
+// import EmpresaSelect from './EmpresaSelect'
 import GroupGenerator from './GroupGenerator'
-import MotivoInput from './MotivoInput'
+// import MotivoInput from './MotivoInput'
 import GroupList from './GroupList';
+import MotivoAccordion from './MotivoAccordion';
 
 const documento = require("./AH-HR-R07-REGISTRO-HORAS-PERENTORIAS.docx")
 // TODO simbolitos de cuadrados ☐  ☒
@@ -68,10 +69,10 @@ const getDuration = function (time1, time2) {
 
         let newdiff = x.diff(y);
         let result = moment.duration(newdiff);
-        console.log(result)
+        // console.log(result)
         let entero = Math.floor(-parseFloat(result.as("hours")));
         let decimal = (-parseFloat(result.as("hours")) % 1).toFixed(2).substring(2)
-        console.log(entero)
+        // console.log(entero)
         if (parseInt(decimal) < 25) {
             return `${entero},00`
         }
@@ -145,15 +146,15 @@ export default function PerentronApp() {
 
     // console.log(groupInfo)
 
-    const addCompany = (compañia) => {
-        // console.log(compañia)
-        setComonGroupInfo({ ...comonGroupInfo, compañia: compañia })
-    };
+    // const addCompany = (compañia) => {
+    //     // console.log(compañia)
+    //     setComonGroupInfo({ ...comonGroupInfo, compañia: compañia })
+    // };
 
-    const addCompanyBoolean = (isRyanair, isIhandling) => {
-        // console.log(isRyanair, isIhandling)
-        setComonGroupInfo({ ...comonGroupInfo, isRyanair, isIhandling })
-    }
+    // const addCompanyBoolean = (isRyanair, isIhandling) => {
+    //     // console.log(isRyanair, isIhandling)
+    //     setComonGroupInfo({ ...comonGroupInfo, isRyanair, isIhandling })
+    // }
 
     const addDate = (date) => {
         setComonGroupInfo({ ...comonGroupInfo, fecha: date })
@@ -163,10 +164,12 @@ export default function PerentronApp() {
         setComonGroupInfo({ ...comonGroupInfo, supervisor: supervisor })
     };
 
-    const addChekedMotivo = (...checkedMotivo) => {
-        setComonGroupInfo({ ...comonGroupInfo, checkedMotivo })
-    }
+    // descontinuada por cambio de las feactures para agregar el motivo
+    // const addChekedMotivo = (...checkedMotivo) => {
+    //     setComonGroupInfo({ ...comonGroupInfo, checkedMotivo })
+    // }
 
+    // cambiada para agregar al comonGroupInfo los diferentes motivos del nuevo formato word
     const addMotivo = (motivo) => {
         setComonGroupInfo({ ...comonGroupInfo, motivo: motivo })
     };
@@ -240,14 +243,26 @@ export default function PerentronApp() {
                     });
                     doc.setData({
                         supervisor: comonGroupInfo.supervisor,
-                        motivo: comonGroupInfo.motivo,
                         isRyanair: comonGroupInfo.isRyanair,
                         isIhandling: comonGroupInfo.isIhandling,
                         fecha: comonGroupInfo.fecha,
-                        impuntualidad: comonGroupInfo.checkedMotivo[0].impuntualAC ? "☒" : "☐",
-                        retraso: comonGroupInfo.checkedMotivo[0].retrasoRel ? "☒" : "☐",
-                        ausencia: comonGroupInfo.checkedMotivo[0].ausencia ? "☒" : "☐",
-                        otra: comonGroupInfo.checkedMotivo[0].otraCircus ? "☒" : "☐",
+                        flightNumber: comonGroupInfo.motivo.flightNumber,
+                        std: comonGroupInfo.motivo.std,
+                        atd: comonGroupInfo.motivo.atd,
+                        registration: comonGroupInfo.motivo.registration,
+                        cargoRelevada: comonGroupInfo.motivo.cargoPersonaRelevada,
+                        nombreRelevada: comonGroupInfo.motivo.nombreRelevada,
+                        motivoRelevada: comonGroupInfo.motivo.motivoRelevada,
+                        cargoAusente: comonGroupInfo.motivo.cargoPersonaAusente,
+                        nombreAusente: comonGroupInfo.motivo.nombreAusente,
+                        motivoAusente: comonGroupInfo.motivo.motivoAusente,
+                        motivoServicio: comonGroupInfo.motivo.motivoAusente,
+                        motivoExcepcional: comonGroupInfo.motivo.motivoExcepcional,
+                        // motivo: comonGroupInfo.motivo,
+                        // impuntualidad: comonGroupInfo.checkedMotivo[0].impuntualAC ? "☒" : "☐",
+                        // retraso: comonGroupInfo.checkedMotivo[0].retrasoRel ? "☒" : "☐",
+                        // ausencia: comonGroupInfo.checkedMotivo[0].ausencia ? "☒" : "☐",
+                        // otra: comonGroupInfo.checkedMotivo[0].otraCircus ? "☒" : "☐",
                         nombre: groupInfo[i].nombre,
                         inicio: groupInfo[i].turnoProgramadoIni,
                         fin: groupInfo[i].turnoProgramadoFin,
@@ -372,11 +387,14 @@ export default function PerentronApp() {
 
                 <Grid container justifyContent={"space-evenly"} spacing={4} style={{ marginTop: "1.5rem" }} >
 
-                    <Grid item lg={4} style={{ paddingLeft: "4rem" }}>
+                    <Grid item lg={5} style={{ paddingLeft: "4rem" }}>
                         <FechaSelect addDate={addDate} />
-                        <EmpresaSelect addCompany={addCompany} addCompanyBoolean={addCompanyBoolean} />
+                        {/* <EmpresaSelect addCompany={addCompany} addCompanyBoolean={addCompanyBoolean} /> */}
                         <DutySelect addSupervisor={addSupervisor} />
-                        <MotivoInput addMotivo={addMotivo} addChekedMotivo={addChekedMotivo} />
+
+                        {/* <MotivoInput addMotivo={addMotivo} addChekedMotivo={addChekedMotivo} /> */}
+
+                        <MotivoAccordion addMotivo={addMotivo} />
 
                         <Button sx={{ marginTop: "1.5rem" }} variant="contained" onClick={saveOnWord} endIcon={<PrintIcon />}>
                             Descargar Word
@@ -384,7 +402,7 @@ export default function PerentronApp() {
                     </Grid>
 
 
-                    <Grid item lg={8}>
+                    <Grid item lg={7}>
                         <GroupGenerator addEmpleado={addEmpleado} />
                         <GroupList groupInfo={groupInfo}
                             addTurno={addTurno} />

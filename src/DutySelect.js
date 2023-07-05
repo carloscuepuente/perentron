@@ -46,6 +46,7 @@ export default function DutySelect(props) {
                     <MenuItem value={"Andres Rico"}>Andres Rico</MenuItem>
                     <MenuItem value={"Iñaqui Crespo"}>Iñaqui Crespo</MenuItem>
                     <MenuItem value={"Fernando Furelos"}>Fernando Furelos</MenuItem>
+                    <MenuItem value={"Gonzalo Pardene"}>Gonzalo Pardene</MenuItem>
                     <MenuItem value={"Elena Camaño"}>Elena Camaño</MenuItem>
                     <MenuItem value={"Paloma Quevedo"}>Paloma Quevedo</MenuItem>
                     <MenuItem value={"Beatriz Rivas"}>Beatriz Rivas</MenuItem>
